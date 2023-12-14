@@ -2,7 +2,6 @@
 
 #this program is meant to be used in the window it spawns
 #do not maximize the window or it will alter the gui buttons
-
 from tkinter import *
 from tkinter.ttk import *
 import tkinter as tk
@@ -75,6 +74,14 @@ def profile():
 
     saved_label = Label(profile_page, text = 'Users you have saved', font=("Arial", 8))
     saved_label.place(x=575, y=15)
+
+    placeholder = Label(profile_page, text = 'Placeholder for custom', font=("Arial", 30))
+    placeholder2 = Label(profile_page, text = 'Image set by user', font=("Arial", 30))
+    placeholder.place(x=65, y=100)
+    placeholder2.place(x=110, y=150)
+
+    del_saved = Button(profile_page, text='Delete Saved User') #no command currently
+    del_saved.place(x=400, y=460)
 def login_helper():
     help_menu = tk.Toplevel()
     help_menu.title("Help")
