@@ -7,13 +7,34 @@ from tkinter.ttk import *
 import tkinter as tk
 import sqlite3 #not used yet
 def edit_profile():
-    print('wip')
+    edit_profile = tk.Toplevel()
+    edit_profile.title("Edit Profile")
+
+    edit_profile.geometry("500x500")
+    edit_profile.configure(bg="black")
+    curr_username = Label(edit_profile, text='(current username placeholder)', font=("Arial", 10))
+    change_password = Label(edit_profile, text='Enter current password here', font=("Arial", 10))
+
+    username_label = Label(edit_profile, text = 'Enter new username below', font = ("Arial", 10))
+    get_username = Entry(edit_profile)
+    get_password = Entry(edit_profile) #no variables to hold new vaules right now
+
+    username_label.place(x=100, y=100)
+    get_username.place(x=100, y=130)
+    change_password.place(x=100, y=200)
+    get_password.place(x=100, y=230)
+
+    confirm = Button(edit_profile, text='Confirm', command = edit_profile.destroy)
+    exit_edit = Button(edit_profile, text = 'Exit', command = edit_profile.destroy)
+
+    confirm.place(x=100, y=260)
+    exit_edit.place(x=100, y=290)
 def profile_helper():
     profile_helper = tk.Toplevel()
-    help_menu.title("Help")
+    profile_helper.title("Help")
 
-    help_menu.geometry("400x400")
-    helptitle = Label(help_menu, text = "Help", font=("Arial", 20))
+    profile_helper.geometry("400x400")
+    helptitle = Label(profile_helper, text = "Help", font=("Arial", 20))
     helptitle.pack()
     message = 'This is your profile page, here you can view and do many different things'
     message2 = 'To search for other users, enter the username to search in the box named "search other users" and click search'
@@ -26,14 +47,17 @@ def profile_helper():
     message3var = Message(profile_helper, text = message3)
     message3var.config(bg='lightgreen')
     message4var =  Message(profile_helper, text = message4)
-    message4ver.config(bd='lightgreen')
+    message4var.config(bg='lightgreen')
     
 
     message1var.pack()
     message2var.pack()
     message3var.pack()
     message4var.pack()
-    
+def not_found(root):
+    label = Label(root, text = "user not found")
+    label.configure(background='red')
+    label.place(x=50, y=550)
 def profile():
     profile_page = tk.Tk()
     profile_page.title("Profile")
@@ -45,7 +69,7 @@ def profile():
 
     search_label = Label(profile_page, text = 'Search other users', font=("Arial", 8))
     search_term = ''
-    search_button = Button(profile_page, text = "Search")
+    search_button = Button(profile_page, text = "Search", command = lambda root = profile_page: not_found(root))
     search_box = Entry(profile_page, textvariable=search_term)
     #at this point we would check if our search term to search for users would match any in the
     #database, but once again i have not made the database yet so imagine this works
@@ -67,8 +91,8 @@ def profile():
     edit_button.place(x=228, y=460)
 
     exit_button = Button(profile_page, text="Exit", command = profile_page.destroy)
-    help_button = Button(profile_page, text="Help", command = profile_helper)
-
+    help_button = Button(profile_page, text="Help",command = profile_helper)
+    
     exit_button.pack(side='bottom')
     help_button.pack(side='bottom')
 
@@ -82,6 +106,7 @@ def profile():
 
     del_saved = Button(profile_page, text='Delete Saved User') #no command currently
     del_saved.place(x=400, y=460)
+    
 def login_helper():
     help_menu = tk.Toplevel()
     help_menu.title("Help")
